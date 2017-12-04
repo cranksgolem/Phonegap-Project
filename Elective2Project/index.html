@@ -9,11 +9,11 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
-	<body>
-		<div align = "center">
-			<div  style = "margin:10px;margin-bottom:20px;" align = "center" >
-				<label align = "left">Company</label>
-				<select class = "form-control" id="company">
+	<body onload = "set_current_date()">
+		<div id="home" style = "display:block">	
+			<div  style = "margin:10px;margin-bottom:20px;" >
+				<label>Company:</label>
+				<select class = "form-control" id="selcompany">
 					<option>Company A</option>
 					<option>Company B</option>
 					<option>Company C</option>
@@ -22,16 +22,32 @@
 			</div>
 			
 			<div style="display:block; margin:10px;margin-bottom:20px;" >
-				<input placeholder = "HH" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;" id="hour"/>
+				<label>Time:</label>
+				<br>
+				<input placeholder = "HH" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="hour"/>
 				<label>:</label>
-				<input placeholder = "MM" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;" id="minute"/>
+				<input placeholder = "MM" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="minute"/>
 				<label>:</label>
-				<input placeholder = "SS" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;" id="second"/>
+				<input placeholder = "SS" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="second"/>
+			</div>
+			
+			<div style="margin:10px;margin-bottom:20px;">
+				<label>Date:</label>
+				<br>
+				<input value = "" id="date" type ="date" style = "display:inline-block;text-align:left;border-radius:4px;width:100%;padding:4px;">
 			</div>
 			
 			<div style = "margin:10px;" >
-				<button type="button" class="btn btn-primary" style = "width:30%;" onclick="on_save()">Add</button>
+				<button type="button" class="btn btn-primary" style = "width:100%;" onclick="on_save()">Add</button>
 			</div>
 		</div>
+		<div id="company" style = "display:none">
+			
+		</div>		
+		<nav style = "overflow: hidden;position: absolute;bottom: 0;width: 100%;display: block;">
+			<input onclick = "open_home()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
+			<input onclick = "open_company()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
+			<input type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
+		</nav>
 	</body>
 </html>
