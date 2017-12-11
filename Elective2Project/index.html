@@ -10,44 +10,60 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body onload = "set_current_date()">
-		<div id="home" style = "display:block">	
-			<div  style = "margin:10px;margin-bottom:20px;" >
-				<label>Company:</label>
-				<select class = "form-control" id="selcompany">
-					<option>Company A</option>
-					<option>Company B</option>
-					<option>Company C</option>
-					<option>Company D</option>
-				</select>
-			</div>
-			
-			<div style="display:block; margin:10px;margin-bottom:20px;" >
-				<label>Time:</label>
-				<br>
-				<input placeholder = "HH" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="hour"/>
-				<label>:</label>
-				<input placeholder = "MM" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="minute"/>
-				<label>:</label>
-				<input placeholder = "SS" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="second"/>
-			</div>
-			
-			<div style="margin:10px;margin-bottom:20px;">
-				<label>Date:</label>
-				<br>
-				<input value = "" id="date" type ="date" style = "display:inline-block;text-align:left;border-radius:4px;width:100%;padding:4px;">
-			</div>
-			
-			<div style = "margin:10px;" >
-				<button type="button" class="btn btn-primary" style = "width:100%;" onclick="on_save()">Add</button>
-			</div>
+		<div id="home" style = "display:block;padding: 20px;background: #f4f7f8;border-radius: 8px;margin-left: 15px;margin-right: 15px;margin-top: 30px;">
+			<form>
+				<fieldset>
+					<legend style="margin:auto;text-align:center;">Add Working Hours</legend>
+					<div  style = "margin:auto;margin-bottom:20px;margin-top:10px;" >
+						<label>Company:</label>
+						<select class = "form-control" id="selcompany">
+				
+						</select>
+					</div>
+					
+					<div style="display:block; margin:auto;margin-bottom:20px" >
+						<label>Time:</label>
+						<br>
+						<input placeholder = "HH" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="hour"/>
+						<label>:</label>
+						<input placeholder = "MM" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="minute"/>
+						<label>:</label>
+						<input placeholder = "SS" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="second"/>
+					</div>
+					
+					<div style="margin:auto;margin-bottom:20px">
+						<label>Date:</label>
+						<br>
+						<input value = "" id="date" type ="date" style = "display:inline-block;text-align:left;border-radius:4px;width:100%;padding:4px;">
+					</div>
+					
+					<div style = "margin:auto;" >
+						<button type="button" class="btn btn-primary" style = "width:100%;" onclick="on_save()">Add</button>
+					</div>
+				</fieldset>
+			</form>
 		</div>
 		<div id="company" style = "display:none">
 			
-		</div>		
+		</div>
+
+		<div id="sources" style = "display:none">
+			<form style = "display:block;padding: 20px;background: #f4f7f8;border-radius: 8px;margin-left: 15px;margin-right: 15px;margin-top: 30px;">
+				<fieldset>
+					<legend style = "margin:auto;text-align:center;">Add Company</legend>
+					<label style="margin-top:10px;">Company:</label>
+					<input value="" style="margin:auto;width:100%;border-radius:4px;padding:4px;" type="text" id="company_name">
+					<br>
+					<label style="margin-top:10px;">Company Rate:</label>
+					<input value="" style="margin:auto;width:100%;border-radius:4px;padding:4px;" type="text" id="company_rate">
+				</fieldset>
+				<button onclick = "add_company()" type="button" class="btn btn-primary" style = "width:100%;margin-top:20px;">Add</button>
+			</form>
+		</div>
 		<nav style = "overflow: hidden;position: absolute;bottom: 0;width: 100%;display: block;">
-			<input onclick = "open_home()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
-			<input onclick = "open_company()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
-			<input type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
+			<input value="Home" onclick = "open_home()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
+			<input value="Companies" onclick = "open_company()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
+			<input value="Sources" onclick = "open_sources()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;">
 		</nav>
 	</body>
 </html>

@@ -31,12 +31,39 @@ document.addEventListener('deviceready', onDeviceReady, false);
 		date = year + "-" + month + "-" + day;
 		
 		document.getElementById("date").value = date;
+		
+		test = window.localStorage.getItem("arraycompany");
+		
+		if (test == null)
+		{
+			var myObj = { "array": new Array()};
+			var myJSON = JSON.stringify(myObj);
+			window.localStorage.setItem("arraycompany", myJSON);		
+		} else
+		{
+			var myObj = JSON.parse(test);
+			
+			if (myObj.array.length != 0)
+			{
+				var arraylength = myObj.array.length;
+				var x = document.getElementById("selcompany");
+				var option = document.createElement("option");
+				var y;
+				
+				for (y = 0; y < arraylength; y++)
+				{
+					option.text = myObj.array[x].CompanyName;
+					x.add(option);
+				}
+			}
+		}
 	}
 	
 	function open_home()
 	{
 		document.getElementById("home").style.display = "block";
 		document.getElementById("company").style.display = "none";
+		document.getElementById("sources").style.display = "none";
 		
 	}
 	
@@ -44,4 +71,32 @@ document.addEventListener('deviceready', onDeviceReady, false);
 	{
 		document.getElementById("home").style.display = "none";
 		document.getElementById("company").style.display = "block";
+		document.getElementById("sources").style.display = "none";
+	}
+	
+	function open_sources()
+	{
+		document.getElementById("home").style.display = "none";
+		document.getElementById("company").style.display = "none";
+		document.getElementById("sources").style.display = "block";
+	}
+	
+	function add_company()
+	{
+		var newcompany = {"CompanyName":document.getElementById("company_name").value, "CompanyRate":document.getElementById("company_rate").value};
+		
+		var listcompany = window.localStorage.getItem("arraycompany");
+		var obj = JSON.parse(listcompany);
+		obj.array.push(newcompany);
+		var myJSON = JSON.stringify(obj);
+		window.localStorage.setItem("arraycompany", myJSON);
+		
+		var listcompany2 = window.localStorage.getItem("arraycompany");
+		var obj2 = JSON.parse(listcompany2);
+		
+		var arraylength = obj2.array.length
+		var x = document.getElementById("selcompany");
+		var option = document.createElement("option");
+		option.text = obj2.array[arraylength - 1].CompanyName;
+		x.add(option);
 	}
