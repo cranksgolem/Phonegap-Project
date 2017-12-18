@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src = "index.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body onload = "set_current_date()">
+		<header>
+			<p id = "prog_header" style="padding-top: 20px; padding-right: 15px;padding-bottom: 20px;color: #D1D6E4;background-color: #2F3F73;text-align: center;font-size: 125%;">Home</p>
+		</header>
+		<div id="home" style = "display:block;padding: 20px;background: #D1D6E4;border-radius: 8px;margin-left: 15px;margin-right: 15px;margin-top: 30px;">
+			<form>
+				<fieldset>
+					<legend style="margin:auto;text-align:center;color:#010513;font-family:Times New Roman">Add Working Hours</legend>
+					<div  style = "margin:auto;margin-bottom:20px;margin-top:10px;" >
+						<label style="color:#010513">Company:</label>
+						<select class = "form-control" id="selcompany">
+				
+						</select>
+					</div>
+					
+					<div style="display:block; margin:auto;margin-bottom:20px" >
+						<label style="color:#010513">Time:</label>
+						<br>
+						<input type="number" placeholder = "HH" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="hour"/>
+						<label>:</label>
+						<input type="number" placeholder = "MM" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="minute"/>
+						<label>:</label>
+						<input type="number" placeholder = "SS" style = "display:inline-block;text-align:center;border-radius:4px;width:30%;padding:4px;" id="second"/>
+					</div>
+					
+					<div style="margin:auto;margin-bottom:20px">
+						<label style="color:#010513">Date:</label>
+						<br>
+						<input value = "" id="date" type ="date" style = "display:inline-block;text-align:left;border-radius:4px;width:100%;padding:4px;">
+					</div>
+					
+					<div style = "margin:auto;" >
+						<button type="button" class="btn btn-primary" style = "width:100%;background:#0A1843;border-color:#0A1843" onclick="on_save()">Add</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div id="company" style = "display:none">
+			<div id="total_amount">
+				<label style="display:block;text-align: right;padding: 4px;margin: 0px 10px 0px 0px;color: lightgrey;">TOTAL AMOUNT</label>
+				<p id="companies_total_amount_display" style="display:block;text-align: right;font-size: 45px;padding: 4px;margin: 0px 8px 0px 0px;border-width: 0px 0px 1px 0px;border-style:solid;border-color: #DCDCDC;">P0.00</p>
+			</div>
+			<div id="list_work_hours">
+			</div>
+		</div>
+	
+		<div id="sources" style = "display:none">
+			<div id="list_companies">
+				
+			</div>
+			<a id="show_form_link" onclick="show_add_form()" style = "margin-top:10px;text-align:center;align:center;display:block;">Add a Company</a>
+			<div>
+				<form id="add_form" style = "display:none;padding: 20px;background: #D1D6E4;border-radius: 8px;margin-left: 15px;margin-right: 15px;margin-top: 30px;">
+					<fieldset>
+						<legend style = "margin:auto;text-align:center;font-family:Times New Roman">Add Company</legend>
+						<label style="margin-top:10px;color:#010513">Company:</label>
+						<input value="" style="margin:auto;width:100%;border-radius:4px;padding:4px;" type="text" id="company_name">
+						<br>
+						<label style="margin-top:10px;color:#010513">Company Rate:</label>
+						<input value="" style="margin:auto;width:100%;border-radius:4px;padding:4px;" type="number" id="company_rate">
+					</fieldset>
+					<button onclick = "add_company()" type="button" class="btn btn-primary" style = "width:100%;background:#0A1843;border-color:#0A1843;margin-top:20px;">Add</button>
+				</form>
+			</div>
+		</div>
+		<nav id="navfooter" style = "overflow: hidden;position: fixed;bottom: 0px;width: 100%;display: block;background:#6C79A3">
+			<input value="Home" onclick = "open_home()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;background:#6C79A3;color:#D1D6E4">
+			<input value="Companies" onclick = "display_company_screen()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;background:#6C79A3;color:#D1D6E4">
+			<input value="Sources" onclick = "open_sources()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;background:#6C79A3;color:#D1D6E4">
+		</nav>
+	</body>
+</html>
