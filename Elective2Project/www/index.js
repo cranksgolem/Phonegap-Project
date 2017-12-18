@@ -246,8 +246,8 @@ document.addEventListener('deviceready', onDeviceReady, false);
 				totalamountheader.innerHTML = "Amount: P" + currency(totalamount);
 				
 				companyheader.style = "display:inline-block;padding:4px;margin:4px;font-size:x-large;width:30%;font-Family: Times New Roman;";
-				totalhoursheader.style = "display:inline-block;padding:4px;margin:4px;font-size:small;width:30%;text-align:right;";
-				totalamountheader.style = "display:inline-block;padding:4px;margin:4px;font-size:small;width:30%;text-align:right;";
+				totalhoursheader.style = "display:inline-block;padding:4px;margin:4px;font-size:small;width:30%;text-align:left;";
+				totalamountheader.style = "display:inline-block;padding:4px;margin:4px;font-size:small;width:30%;text-align:left;";
 				
 				newdivheader.appendChild(companyheader);
 				newdivheader.appendChild(totalhoursheader);

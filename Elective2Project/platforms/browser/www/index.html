@@ -46,9 +46,12 @@
 				</fieldset>
 			</form>
 		</div>
-		<div id="company" style = "display:none">
+		<div id="company" style = "display:none;">
 			<div id="total_amount">
-				<label>TOTAL AMOUNT</label>
+				<label style="display:block;text-align: right;padding: 4px;margin: 0px 10px 0px 0px;color: lightgrey;">TOTAL AMOUNT</label>
+				<p id="companies_total_amount_display" style="display:block;text-align: right;font-size: 45px;padding: 4px;margin: 0px 8px 0px 0px;border-width: 0px 0px 1px 0px;border-style:solid;border-color: #DCDCDC;">P0.00</p>
+			</div>
+			<div style = "margin-bottom:60px;" id="list_work_hours">
 			</div>
 		</div>
 	
@@ -65,7 +68,7 @@
 						<input value="" style="margin:auto;width:100%;border-radius:4px;padding:4px;" type="text" id="company_name">
 						<br>
 						<label style="margin-top:10px;color:#010513">Company Rate:</label>
-						<input value="" style="margin:auto;width:100%;border-radius:4px;padding:4px;" type="text" id="company_rate">
+						<input value="" style="margin:auto;width:100%;border-radius:4px;padding:4px;" type="number" id="company_rate">
 					</fieldset>
 					<button onclick = "add_company()" type="button" class="btn btn-primary" style = "width:100%;background:#0A1843;border-color:#0A1843;margin-top:20px;">Add</button>
 				</form>
@@ -73,7 +76,7 @@
 		</div>
 		<nav id="navfooter" style = "overflow: hidden;position: fixed;bottom: 0px;width: 100%;display: block;background:#6C79A3">
 			<input value="Home" onclick = "open_home()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;background:#6C79A3;color:#D1D6E4">
-			<input value="Companies" onclick = "open_company()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;background:#6C79A3;color:#D1D6E4">
+			<input value="Companies" onclick = "display_company_screen()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;background:#6C79A3;color:#D1D6E4">
 			<input value="Sources" onclick = "open_sources()" type = "button" style = "width:32.5%;display: inline-block;text-align: center;padding: 14px 16px;font-size: 17px;border: none;background:#6C79A3;color:#D1D6E4">
 		</nav>
 	</body>
