@@ -12,39 +12,46 @@ document.addEventListener('deviceready', onDeviceReady, false);
 		var minute = document.getElementById("minute").value;
 		var second = document.getElementById("second").value;
 		
-		hour = parseInt(hour);
-		minute = parseInt(minute);
-		second = parseInt(second);
-		
-		var totalhours = hour + (minute/60) + (second/3600);
-		
-		var myJson = window.localStorage.getItem("arraycompany");
-		var myObj = JSON.parse(myJson);
-		var selectedcompany;
-		var y;
-		
-		for (y = 0; y < myObj.array.length; y++)
+		if (hour.length == 0 || minute.length == 0 || second.length == 0)
 		{
-			if (company == myObj.array[y].innerHTML)
-			{
-				selectedcompany = myObj.array[y];
-			}
+			alert("Please fill up every entry.");
 		}
-		
-		var rate = selectedcompany.CompanyRate;
-		var amount = rate * totalhours;
-		
-		var newworkhour = {"Company":company, "Hours":totalhours, "Datee": document.getElementById("date").value, "Amount":amount};
-		selectedcompany.WorkHours.push(newworkhour);
-		var newJson = JSON.stringify(myObj);
-		window.localStorage.setItem("arraycompany", newJson);
-		
-		document.getElementById("hour").value = "";
-		document.getElementById("minute").value = "";
-		document.getElementById("second").value = "";
+		else
+		{
+			hour = parseInt(hour);
+			minute = parseInt(minute);
+			second = parseInt(second);
+			
+			var totalhours = hour + (minute/60) + (second/3600);
+			
+			var myJson = window.localStorage.getItem("arraycompany");
+			var myObj = JSON.parse(myJson);
+			var selectedcompany;
+			var y;
+			
+			for (y = 0; y < myObj.array.length; y++)
+			{
+				if (company == myObj.array[y].innerHTML)
+				{
+					selectedcompany = myObj.array[y];
+				}
+			}
+			
+			var rate = selectedcompany.CompanyRate;
+			var amount = rate * totalhours;
+			
+			var newworkhour = {"Company":company, "Hours":totalhours, "Datee": document.getElementById("date").value, "Amount":amount};
+			selectedcompany.WorkHours.push(newworkhour);
+			var newJson = JSON.stringify(myObj);
+			window.localStorage.setItem("arraycompany", newJson);
+			
+			document.getElementById("hour").value = "";
+			document.getElementById("minute").value = "";
+			document.getElementById("second").value = "";
+		}
 	}
 	
-	function set_current_date() 
+	function startup() 
 	{
 		console.log("Start_up");
 		
@@ -105,7 +112,6 @@ document.addEventListener('deviceready', onDeviceReady, false);
 					newlabel2.style = "display:inline-block;padding-top:3px;width:52%;color:#010513;";
 					newicon.style = "display:inline-block;padding-top: 3px;width:10%;";
 					newicon.className = "glyphicon glyphicon-remove";
-					//newicon.innerHTML = myObj.array[y].innerHTML;
 					newicon.id = myObj.array[y].innerHTML;
 					newicon.onclick = remove_company;
 					newdiv.appendChild(newlabel1);
@@ -335,48 +341,85 @@ document.addEventListener('deviceready', onDeviceReady, false);
 	
 	function add_company()
 	{
+		var y;
+		var arraylength;
+		var unique = true;
+		var nofieldempty = true;
+		
 		var newcompany = {"CompanyName":document.getElementById("company_name").value, "CompanyRate":document.getElementById("company_rate").value, "WorkHours":new Array()};
 		newcompany.innerHTML = document.getElementById("company_name").value;
 		
 		var listcompany = window.localStorage.getItem("arraycompany");
 		var obj = JSON.parse(listcompany);
-		obj.array.push(newcompany);
-		var myJSON = JSON.stringify(obj);
-		window.localStorage.setItem("arraycompany", myJSON);
 		
-		var arraylength = obj.array.length
-		var x = document.getElementById("selcompany");
-		var option = document.createElement("option");
-		option.text = obj.array[arraylength - 1].innerHTML;
-		x.add(option);
+		arraylength = obj.array.length;
 		
-		var parentdiv = document.getElementById("list_companies");
+		for (y=0; y < arraylength; y++)
+		{
+			if (obj.array[y].innerHTML == newcompany.innerHTML)
+			{
+				unique = false;
+				break;
+			}
+		}
 		
-		var newdiv = document.createElement("div");
-		var newlabel1 = document.createElement("label");
-		var newlabel2 = document.createElement("label");
-		var newicon = document.createElement("i");
+		if (document.getElementById("company_name").value.length == 0 || document.getElementById("company_rate").value.length == 0)
+		{
+			nofieldempty = false;
+		}
 		
-		newlabel1.innerHTML = obj.array[arraylength - 1].innerHTML;
-		newlabel2.innerHTML = "P" + obj.array[arraylength - 1].CompanyRate;
+		if (unique == true && nofieldempty == true)
+		{
 		
-		newdiv.style = "width:100%;border-width: 0px 0px 1px 0px;border-style:solid;border-color: #DCDCDC;";
-		newlabel1.style = "display:inline-block;padding-top:3px;width:30%;font-Family: Times New Roman;margin-left: 20px;color: #6C79A3";
-		newlabel2.style = "display:inline-block;padding-top:3px;width:52%;color:#010513;";
-		newicon.style = "display:inline-block;padding-top: 3px;width:10%;";
-		newicon.className = "glyphicon glyphicon-remove";
-		//newicon.innerHTML = obj.array[arraylength - 1].innerHTML;
-		newicon.id = obj.array[arraylength - 1].innerHTML;
-		newicon.onclick = remove_company;
-		newdiv.appendChild(newlabel1);
-		newdiv.appendChild(newlabel2);
-		newdiv.appendChild(newicon);
-		
-		parentdiv.appendChild(newdiv);
-		
-		document.getElementById("add_form").style.display = "none";
-		document.getElementById("show_form_link").style.display = "block";
-		
-		document.getElementById("company_name").value = "";
-		document.getElementById("company_rate").value = "";
+			obj.array.push(newcompany);
+			var myJSON = JSON.stringify(obj);
+			window.localStorage.setItem("arraycompany", myJSON);
+			
+			arraylength = obj.array.length
+			var x = document.getElementById("selcompany");
+			var option = document.createElement("option");
+			option.text = obj.array[arraylength - 1].innerHTML;
+			x.add(option);
+			
+			var parentdiv = document.getElementById("list_companies");
+			
+			var newdiv = document.createElement("div");
+			var newlabel1 = document.createElement("label");
+			var newlabel2 = document.createElement("label");
+			var newicon = document.createElement("i");
+			
+			newlabel1.innerHTML = obj.array[arraylength - 1].innerHTML;
+			newlabel2.innerHTML = "P" + obj.array[arraylength - 1].CompanyRate;
+			
+			newdiv.style = "width:100%;border-width: 0px 0px 1px 0px;border-style:solid;border-color: #DCDCDC;";
+			newlabel1.style = "display:inline-block;padding-top:3px;width:30%;font-Family: Times New Roman;margin-left: 20px;color: #6C79A3";
+			newlabel2.style = "display:inline-block;padding-top:3px;width:52%;color:#010513;";
+			newicon.style = "display:inline-block;padding-top: 3px;width:10%;";
+			newicon.className = "glyphicon glyphicon-remove";
+			newicon.id = obj.array[arraylength - 1].innerHTML;
+			newicon.onclick = remove_company;
+			newdiv.appendChild(newlabel1);
+			newdiv.appendChild(newlabel2);
+			newdiv.appendChild(newicon);
+			
+			parentdiv.appendChild(newdiv);
+			
+			document.getElementById("add_form").style.display = "none";
+			document.getElementById("show_form_link").style.display = "block";
+			
+			document.getElementById("company_name").value = "";
+			document.getElementById("company_rate").value = "";
+		}
+		else
+		{
+			if (unique == false)
+			{
+				alert("Company name must be unique. Please check your entry.");
+			}
+			
+			if (nofieldempty == false)
+			{
+				alert("Please fill up every entry.");
+			}
+		}
 	}
